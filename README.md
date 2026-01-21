@@ -1,3 +1,3 @@
 # github-actions-hands-on
 
-instalar complemento github actions
+instalar complemento github actions.
