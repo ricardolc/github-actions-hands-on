@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show the trigger
-        run: echo "Evento disparado por trigger ${{ github.event_name }}""
+        run: echo "Evento disparado por  trigger ${{ github.event_name }}""
