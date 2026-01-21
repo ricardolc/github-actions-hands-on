@@ -1,13 +1,13 @@
 name: 02 workflows events
 
-on: 
-  push:
-  pull_request:
-  schedule:
-    - cron: '*/1 * * * *' # Every 5 minutes
-  workflow_dispatch:
+# on: 
+#   push:
+#   pull_request:
+#   schedule:
+#     - cron: '*/1 * * * *' # Every 5 minutes
+#   workflow_dispatch:
 
-#on: workflow_dispatch
+on: workflow_dispatch
 
 jobs:
    echo:
