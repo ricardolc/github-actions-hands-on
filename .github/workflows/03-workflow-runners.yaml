@@ -1,0 +1,21 @@
+name: 03 - Workflow Riunners Ricardo
+
+on: workflow_dispatch
+
+
+jobs: 
+    echo-ubuntu:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Show OS
+        run: echo "This job is running on an $RUNNER_OS runner"
+    echo-windows:
+      runs-on: windows-latest
+      steps:
+      - name: Show OS
+        run: echo "This job is running on an $RUNNER_OS runner"
+    echo-macos:
+      runs-on: macos-latest
+      steps: 
+      - name: Show OS
+        run: echo "This job is running on an $RUNNER_OS runner"
