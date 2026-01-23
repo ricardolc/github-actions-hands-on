@@ -1,4 +1,4 @@
-name: 03 - Workflow Riunners Ricardo
+name: 03 - Workflow Runners Ricardo
 
 on: workflow_dispatch
 
