@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-    echo:
+    _05-using-filters-echo:
       runs-on: ubuntu-latest
       steps:
         - name: Show the trigger
