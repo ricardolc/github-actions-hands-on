@@ -1,5 +1,5 @@
-Doc
-instalar complemento github actions.
+Doc.
+instalar complemento github actions..
 
 
 https://github.com/marketplace?type=actions
