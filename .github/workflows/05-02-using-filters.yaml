@@ -8,8 +8,8 @@ on:
       - main
 
 jobs:
-    _05-using-filters-echo:
+    _05-02-using-filters-echo:
       runs-on: ubuntu-latest
       steps:
         - name: Show the trigger
-          run: echo "Evento disparado por  trigger on closed: ${{ github.event_name }}"
+          run: echo "Evento disparado por  trigger closed:\ ${{ github.event_name }}"
