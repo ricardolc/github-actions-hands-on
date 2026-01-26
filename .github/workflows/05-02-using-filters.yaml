@@ -1,0 +1,15 @@
+name: 05 - 02 - Event Filters and Activities Types
+
+on: 
+  pull_request:
+    types: 
+      - closed
+    branches:
+      - main
+
+jobs:
+    _05-using-filters-echo:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Show the trigger
+          run: echo "Evento disparado por  trigger on closed: ${{ github.event_name }}"
