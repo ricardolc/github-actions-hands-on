@@ -14,11 +14,9 @@ env:
 jobs:
     echo-data:
       runs-on: ubuntu-latest
-
-    env: 
+      env: 
         MY_JOB_VAR: "job 1"
         MY_OVERRIDE_VAR: "job 2"
-
       steps:
         - name: Display Information Ricardo
           run: |
@@ -36,16 +34,16 @@ jobs:
           run: |
                 echo "Variable Value${{ vars.MY_VAR }}" # > settings> secrets > actions - add variable
         - name: Print Env Vars
-
-          env: MY_OVERRIDE_VAR = "step level"
+          env: 
+            MY_OVERRIDE_VAR: 'step level'
           run: |
-                echo "Workflow Level Variable:  ${{ MY_WORKFLOW_VAR }}"
+                echo "Workflow Level Variable:  ${{ env.MY_WORKFLOW_VAR }}"
                 echo "Job Level Variable:  ${{ env.MY_JOB_VAR }}"
                 echo "Overridden Variable: ${{ env.MY_OVERRIDE_VAR }}" 
 
         - name: Print Env Vars 2
           run: |
-                echo "Workflow Level Variable:  ${{ MY_WORKFLOW_VAR }}"
+                echo "Workflow Level Variable:  ${{ env.MY_WORKFLOW_VAR }}"
                 echo "Job Level Variable:  ${{ env.MY_JOB_VAR }}"
                 echo "Overridden Variable: ${{ env.MY_OVERRIDE_VAR }}" 
 
