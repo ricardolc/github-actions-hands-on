@@ -8,10 +8,17 @@ on:
             debug:
                 type: boolean
                 default: false
-
+env: 
+    MY_WORKFLOW_VAR: "This is an environment variable Ricardo"
+    MY_OVERRIDE_VAR: "This is an overridden variable Ricardo"
 jobs:
     echo-data:
       runs-on: ubuntu-latest
+
+    env: 
+        MY_JOB_VAR: "job 1"
+        MY_OVERRIDE_VAR: "job 2"
+
       steps:
         - name: Display Information Ricardo
           run: |
@@ -24,7 +31,22 @@ jobs:
                 echo "Job: ${{ github.job }}"
                 echo "Run ID: ${{ github.run_id }}"
                 echo "Run Number: ${{ github.run_number }}"
+                
         - name: Retrieve Variables
           run: |
                 echo "Variable Value${{ vars.MY_VAR }}" # > settings> secrets > actions - add variable
+        - name: Print Env Vars
+
+          env: MY_OVERRIDE_VAR = "step level"
+          run: |
+                echo "Workflow Level Variable:  ${{ MY_WORKFLOW_VAR }}"
+                echo "Job Level Variable:  ${{ env.MY_JOB_VAR }}"
+                echo "Overridden Variable: ${{ env.MY_OVERRIDE_VAR }}" 
+
+        - name: Print Env Vars 2
+          run: |
+                echo "Workflow Level Variable:  ${{ MY_WORKFLOW_VAR }}"
+                echo "Job Level Variable:  ${{ env.MY_JOB_VAR }}"
+                echo "Overridden Variable: ${{ env.MY_OVERRIDE_VAR }}" 
+
                 
