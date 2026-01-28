@@ -21,5 +21,5 @@ jobs:
                 echo "Run Number: ${{ github.run_number }}"
         - name: Retrieve Variables
           run: |
-                echo "Variable Value${{ vars.MY_VARI }}"
+                echo "Variable Value${{ vars.MY_VAR }}" # > settings> secrets > actions - add variable
                 
