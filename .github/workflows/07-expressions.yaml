@@ -1,8 +1,9 @@
 name: 07 - using expressions
 description: "como usar expressões em fluxos de trabalho do GitHub Actions"
+run-name: 07 - Expressions | DEBUG - ${{ inputs.debug && 'ON' || 'OFF' }}
 
 on: 
-#  push:
+  push:
   workflow_dispatch:
     inputs:
       debug:
