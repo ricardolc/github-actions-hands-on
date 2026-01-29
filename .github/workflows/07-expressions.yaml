@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "[debug] Print  information"
-        if: ${{ inputs.debug == 'true' }}
+        if: ${{ inputs.debug }}
         run: |
           echo "Triggering user: ${{ github.event_name }}"
           echo "Branch: ${{ github.ref }}"
