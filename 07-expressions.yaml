@@ -1,0 +1,37 @@
+name: 07 - using expressions
+Description: como usar expressões em fluxos de trabalho do GitHub Actions
+
+on: 
+  push:
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Ativar modo de depuração'
+        required: false
+        default: 'false'
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "[debug] Print  information"
+        if: ${{ inputs.debug == 'true' }}
+        run: |
+          echo "Triggering user: ${{ github.event_name }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Workflow: ${{ github.workflow }}"
+          echo "Run ID: ${{ github.run_id }}"
+          echo "Run Number: ${{ github.run_number }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Event Payload: ${{ toJson(github.event) }}"
+          echo "Commig Sha: ${{ github.sha }}"
+          echo "Runner OS: ${{ runner.os }}"
+      - name: "[debug] Print When Triggering from main""
+        if: ${{ github.ref == 'refs/heads/main' && inputs.debug == 'true' }}
+        run: |
+          echo "This workflow was triggered from the main branch."
+      - name: "Print Greeting"
+        run: |
+          echo "Hello world, ${{ github.actor }}! This workflow was triggered by a ${{ github.event_name }} event."
+
+          

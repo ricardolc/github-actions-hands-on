@@ -12,3 +12,5 @@ https://docs.github.com/pt/actions/reference/workflows-and-actions/workflow-synt
 
 https://docs.github.com/en/actions/reference/workflows-and-actions/contexts
 
+git add . && git commit -m "feat: training gha: $(date +'%d/%m/%Y %H:%M:%S:%3N')" && git push
+
