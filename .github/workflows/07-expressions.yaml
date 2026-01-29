@@ -1,5 +1,5 @@
 name: 07 - using expressions
-Description: como usar expressões em fluxos de trabalho do GitHub Actions
+description: "como usar expressões em fluxos de trabalho do GitHub Actions"
 
 on: 
   push:
@@ -26,7 +26,7 @@ jobs:
           echo "Event Payload: ${{ toJson(github.event) }}"
           echo "Commig Sha: ${{ github.sha }}"
           echo "Runner OS: ${{ runner.os }}"
-      - name: "[debug] Print When Triggering from main""
+      - name: "[debug] Print When Triggering from main"
         if: ${{ github.ref == 'refs/heads/main' && inputs.debug == 'true' }}
         run: |
           echo "This workflow was triggered from the main branch."
