@@ -2,7 +2,7 @@ name: 07 - using expressions
 description: "como usar expressões em fluxos de trabalho do GitHub Actions"
 
 on: 
-  push:
+#  push:
   workflow_dispatch:
     inputs:
       debug:
@@ -28,7 +28,7 @@ jobs:
           echo "Commig Sha: ${{ github.sha }}"
           echo "Runner OS: ${{ runner.os }}"
       - name: "[debug] Print When Triggering from main"
-        if: ${{ github.ref == 'refs/heads/main' && inputs.debug == 'true' }}
+        if: ${{ github.ref == 'refs/heads/main' && inputs.debug }}
         run: |
           echo "This workflow was triggered from the main branch."
       - name: "Print Greeting"
