@@ -8,7 +8,8 @@ on:
       debug:
         description: 'Ativar modo de depuração'
         required: false
-        default: 'false'
+        type: boolean
+        default: false
 jobs:
   echo:
     runs-on: ubuntu-latest
