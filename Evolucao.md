@@ -6,3 +6,4 @@ Secao 8.
 Session 9
 
   30. Theory - Expressions
+  33. Theory - Variables - ok
