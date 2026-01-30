@@ -1,0 +1,37 @@
+name: 08 - Using variables
+
+
+on: 
+    push:
+    workflow_dispatch:
+
+env:
+    OVERALL_MY_ENV_VAR: "OVERALL_MY_ENV_VAR variable 1"
+
+jobs:
+    echo:
+      runs-on: ubuntu-latest
+      env:
+        JOB_MY_ENV_VAR: "This is a job level environment variable"
+        OVERALL_MY_ENV_VAR: "OVERALL_MY_ENV_VAR variable 2"
+      steps:
+        - name: "Print Variables"
+          env:
+            STEP_MY_ENV_VAR_1: "This is an environment variable"
+            STEP_MY_ENV_VAR_2: "This is another environment variable"
+
+          run: |
+            echo "Environment Variable: $STEP_MY_ENV_VAR_1"
+            echo "Environment Variable: ${{ env.STEP_MY_ENV_VAR_1 }}"
+            echo "GitHub Repository: ${{ github.repository }}"
+            echo "GitHub Actor: ${{ github.actor }}"
+            echo "Job Level Environment Variable: $JOB_MY_ENV_VAR"
+            echo "Step Level Environment Variable 2: $STEP_MY_ENV_VAR_2"
+            echo "Overall Environment Variable: $OVERALL_MY_ENV_VAR"
+            echo "Overall Environment Variable via env context: ${{ env.OVERALL_MY_ENV_VAR }}"
+        - name: "Overwrite Overall Variable"
+          env:
+            OVERALL_MY_ENV_VAR: "OVERALL_MY_ENV_VAR variable 3"
+          run: |
+            echo "Overall Environment Variable after override: $OVERALL_MY_ENV_VAR"
+            echo "Overall Environment Variable after override via env context: ${{ env.OVERALL_MY_ENV_VAR }}"
