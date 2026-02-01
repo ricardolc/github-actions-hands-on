@@ -22,7 +22,7 @@ jobs:
                 echo "Building application..."
     unit-test:
         runs-on: ubuntu-latest
-        continue-on-error: true
+#        continue-on-error: true
         steps:
             - name: Run unit tests
               run: |
