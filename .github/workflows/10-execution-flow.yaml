@@ -1,0 +1,66 @@
+name: 10 - Controlling execution flow
+
+on: 
+#  push:
+  workflow_dispatch:
+    inputs:
+      pass-unit-tests:
+        description: 'SWhether unit tests  or not'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+    lint-build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Lint code
+              run: |
+                echo "Linting code..."
+            - name: Build application
+              run: |
+                echo "Building application..."
+    unit-test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Run unit tests
+              run: |
+                echo "Running unit tests..."
+            - name: Failing tests
+              if: ${{ !inputs.pass-unit-tests}}
+              run: |
+                echo "Some unit tests failed!"
+                exit 1
+    deploy-nonprod:
+        runs-on: ubuntu-latest
+        #needs: [lint-build, unit-test]
+        needs:
+            - lint-build
+            - unit-test
+        steps:
+            - name: Deploy to non-production
+              run: |
+                echo "Deploying to non-production .."
+    e2e-tests:
+        runs-on: ubuntu-latest
+        needs: deploy-nonprod
+        steps:
+            - name: Run end-to-end tests
+              run: |
+                echo "Running end-to-end tests..."
+    load-tests:
+        runs-on: ubuntu-latest
+        needs: deploy-nonprod
+        steps:
+            - name: Run load tests
+              run: |
+                echo "Running load tests..."
+    deploy-prod:
+        runs-on: ubuntu-latest
+        needs: 
+            - e2e-tests
+            - load-tests
+        steps:
+            - name: Run deploy prod tests
+              run: |
+                echo "Running deploy-prod tests..."
