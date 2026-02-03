@@ -33,6 +33,7 @@ jobs:
             echo "Building application from tab: ${{ inputs.tag }}"
   deploy:
     runs-on: ubuntu-latest
+    needs: build
     if: ${{ !inputs.dry-run }}
     environment: ${{ inputs.target }}
     steps:
