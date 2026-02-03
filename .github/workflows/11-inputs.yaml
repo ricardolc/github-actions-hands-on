@@ -22,8 +22,6 @@ on:
                     - 'v3'
                 default: 'v3'
 
-
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -37,6 +35,10 @@ jobs:
     if: ${{ !inputs.dry-run }}
     environment: ${{ inputs.target }}
     steps:
+      - name: Read VAR_1 from staging environment
+        if: ${{ inputs.target == 'staging' }}
+        run: |
+            echo "VAR_1: ${{ vars.VAR_1 }}"
       - name: Deploy
         run: |
             echo "Deploying to ${{ inputs.target }}"
