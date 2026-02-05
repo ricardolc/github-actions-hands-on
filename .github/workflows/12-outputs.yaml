@@ -2,7 +2,7 @@ name: 12 - Working with Outputs
 
 on:
   workflow_dispatch:
-    input:
+    inputs:
       build-status:
         description: 'Simulate build status'
         required: false
@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       minha-chave: ${{ steps.id-build-step.outputs.minha-chave }}
+      nome-bd-saida: ${{ steps.id-build-step.outputs.nome-bd }}
     steps:
       - name: Print Github_output path
         run: |
@@ -26,7 +27,8 @@ jobs:
         id: id-build-step
         run: |
           echo "Building application..."
-          echo "minha-chave=${{ inputs.build-status: }} completed successfully!" >> $GITHUB_OUTPUT
+          echo "minha-chave=${{ inputs.build-status }} completed successfully!" >> $GITHUB_OUTPUT
+          echo "nome-bd=sql completed successfully!" >> $GITHUB_OUTPUT
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -35,3 +37,4 @@ jobs:
         run: |
           echo "Deploying application with output from build step..."
           echo "Output from build step - minha-chave: ${{ needs.build.outputs.minha-chave }}"
+          echo "Output from build step - nome-bd: ${{ needs.build.outputs.nome-bd-saida }}"
