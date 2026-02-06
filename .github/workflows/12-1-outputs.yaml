@@ -37,7 +37,7 @@ jobs:
           echo "mistake=true" >> $GITHUB_OUTPUT
           echo ˜showing output file content step 2˜
           cat "$GITHUB_OUTPUT"
-          echo "newmistake=true" >> $GITHUB_OUTPUT
+          echo "newmistake=true" > $GITHUB_OUTPUT
           echo ˜showing output file content step 3˜
           cat "$GITHUB_OUTPUT"          
 
