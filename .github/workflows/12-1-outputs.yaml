@@ -19,6 +19,7 @@ jobs:
     outputs:
       minha-chave: ${{ steps.id-build-step.outputs.minha-chave }}
       nome-bd-saida: ${{ steps.id-build-step.outputs.nome-bd }}
+      output1-out: ${{ steps.id-build-step.outputs.output1 }}
     steps:
       - name: Print Github_output path
         run: |
@@ -30,6 +31,16 @@ jobs:
           echo "GITHUB_OUTPUT path: $GITHUB_OUTPUT"
           echo "minha-chave=${{ inputs.build-status }} completed successfully!" >> $GITHUB_OUTPUT
           echo "nome-bd=sql completed successfully!" >> $GITHUB_OUTPUT
+          echo "output1=value1" >> $GITHUB_OUTPUT
+          echo ˜showing output file content step 1˜
+          cat "$GITHUB_OUTPUT"
+          echo "mistake=true" >> $GITHUB_OUTPUT
+          echo ˜showing output file content step 2˜
+          cat "$GITHUB_OUTPUT"
+          echo "newmistake=true" >> $GITHUB_OUTPUT
+          echo ˜showing output file content step 3˜
+          cat "$GITHUB_OUTPUT"          
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -39,3 +50,4 @@ jobs:
           echo "Deploying application with output from build step..."
           echo "Output from build step - minha-chave: ${{ needs.build.outputs.minha-chave }}"
           echo "Output from build step - nome-bd: ${{ needs.build.outputs.nome-bd-saida }}"
+          echo "Output from build step - output1: ${{ needs.build.outputs.output1-out }}"
