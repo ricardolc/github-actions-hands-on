@@ -1,0 +1,40 @@
+name: 13 - Using Caching in GitHub Actions
+description: "Demonstrating how to use caching in GitHub Actions workflows"
+
+on:
+    workflow_dispatch:
+      inputs:
+        use-cache:
+            description: "Whether execute cache step"
+            type: boolean
+            default: true
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        defaults:
+            run:
+                working-directory: 13-caching-folder/react-app
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Setuo Node
+              uses: actions/setup-node@v3
+              with:
+                node-version: '20.x'
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Testing
+              run: npm run test
+              
+            - name: Build
+              run: npm run build
+
+            - name: Deploy to non-production
+              run: |
+                echo "Deploying to non-production environment without cache..."
