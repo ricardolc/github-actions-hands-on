@@ -34,7 +34,15 @@ jobs:
               with:
                 node-version: ${{ inputs.node-version }}
 
+            - name: Download cache dependencies
+              uses: actions/cache@v3
+              if: ${{ inputs.use-cache }}
+              id: cache-id
+              with: 
+                  path: 13-caching-folder/react-app/node_modules
+                  key: key-node-modules-${{ hashFiles('13-caching-folder/react-app/package-lock.json') }}
             - name: Install dependencies
+              if: steps.cache-id.outputs.cache-hit != 'true'
               run: npm ci
 
             - name: Testing
