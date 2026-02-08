@@ -1,0 +1,67 @@
+name: 13-1 - Using Caching in GitHub Actions
+description: "Demonstrating how to use caching in GitHub Actions workflows"
+
+on:
+    workflow_dispatch:
+      inputs:
+        use-cache:
+            description: "Whether execute cache step"
+            type: boolean
+            default: true
+        node-version:
+            description: "Select the Node.js version for caching"
+            type: choice
+            options:
+                - '18.x'
+                - '20.x'
+                - '21.x'
+            default: '20.x'
+
+jobs:
+  install-deps:
+    runs-on: ubuntu-latest
+
+    defaults:
+        run:
+            working-directory: 13-caching-folder/react-app
+    outputs:
+        deps-cache-key-my-output: ${{ steps.cache-key.outputs.CACHE_KEY }}
+
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Setuo Node
+          uses: actions/setup-node@v3
+          with:
+            node-version: ${{ inputs.node-version }}
+
+        - name: Calculate cache key
+          id: cache-key
+          run: echo "CACHE_KEY=key-node-modules-${{ hashFiles('13-caching-folder/react-app/package-lock.json') }}" >> $GITHUB_ENV
+
+        - name: Download cache dependencies
+          uses: actions/cache@v3
+          if: ${{ inputs.use-cache }}
+          id: cache-id
+          with: 
+              path: 13-caching-folder/react-app/node_modules
+              key: ${{ steps.cache-key.outputs.CACHE_KEY }}
+
+                - name: Testing
+          run: npm run test
+  build:
+    runs-on: ubuntu-latest
+    needs: install-deps
+    defaults:
+        run:
+            working-directory: 13-caching-folder/react-app
+
+
+          
+        - name: Build
+          run: npm run build
+
+        - name: Deploy to non-production
+          run: |
+            echo "Deploying to non-production environment without cache..."
