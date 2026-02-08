@@ -9,6 +9,7 @@ env:
 
 jobs:
     test-build:
+        name: Test and Build
         runs-on: ubuntu-latest
         defaults:
             run:
@@ -52,7 +53,7 @@ jobs:
             - name: Download build artifact
               uses: actions/download-artifact@v4
               with:
-                    name: pp-build-${{ env.build-artifact-key}} 
+                    name: app-build-${{ env.build-artifact-key}} 
                     path: build
             - name: Show folder structure
               run: |
