@@ -5,16 +5,20 @@ on:
 
 
 jobs:
-    include-example:
-      name: ${{ matrix.color }}-${{ matrix.shape }}-${{ matrix.size }}
-      runs-on: ubuntu-latest
-    
-      strategy:
-        matrix:
-          color: [red, green]
-          shape: [circle, square]
-          size: [small, large]
-          include:
-            - color: red
-              shape: triangle
+    backwards-compatibility:
+        name: ${{ matrix.os }}-${{ matrix.node-version }}
+        runs-on: ${ { matrix.os } }
 
+        strategy:
+            fail-fast: false # If set to false, all jobs will run to completion, even if some fail.
+            matrix:
+                node-version: [18.x, 20.x, 21.x]
+                os: [ubuntu-latest, windows-latest]
+        steps:
+            - name: Setup Node
+              uses: actions/setup-node@v3
+              with:
+                node-version: ${{ matrix.node-version }}
+            - name: Perform some tests
+              run: |
+                echo "Running tests on OS: ${{ matrix.os }} and Node version: ${{ matrix.node-version }}"   
