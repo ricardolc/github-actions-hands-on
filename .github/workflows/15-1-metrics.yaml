@@ -10,6 +10,7 @@ jobs:
         runs-on: ${ { matrix.os } }
 
         strategy:
+            fail-fast: false # If set to false, all jobs will run to completion, even if some fail.
             matrix:
                 node-version: [18.x, 20.x, 21.x]
                 os: [ubuntu-latest, windows-latest]
