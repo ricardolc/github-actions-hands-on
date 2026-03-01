@@ -25,8 +25,12 @@ jobs:
               uses: actions/cache@v3
               id: cache-id
               with:
-                path: 13-caching-folder/react-app/node_modules
-                key: deps-node-modules-${{ hashFiles('14-artifacts/react-app/package-json') }}
+                # the working directory for this job is `14-artifacts-folder/react-app`
+                # the previous version was accidentally pointing at `13-caching-folder`
+                # and the hashFiles call omitted the `.json` extension. both issues
+                # prevented effective caching and made diagnosis harder.
+                path: 14-artifacts-folder/react-app/node_modules
+                key: deps-node-modules-${{ hashFiles('14-artifacts-folder/react-app/package.json') }}
             - name: Install dependencies
               if: steps.cache-id.outputs.cache-hit != 'true'
               run: npm ci
