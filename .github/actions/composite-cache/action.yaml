@@ -3,6 +3,10 @@ description: "Allows actions Ricardo"
 
 # antes de executar o aplicativo criar a pasta 17 e dentro dela criar o app react conforme comando abaixo
 # npx create-react-app react-app --template typescript   # correct command
+#rm -rf node_modules rm package-lock.json # ou yarn.lock, se usar Yarn
+#npm install
+#npm install yaml@2.8.2
+
 inputs:
   node-version:
     description: "Node.js version to use"
@@ -25,8 +29,8 @@ runs:
       uses: actions/cache@v3
       with:
         path: ${{ inputs.working-dir }}/node_modules
-        #key: node-modules-${{ hashFiles('${{inputs.working-dir}}/package-lock.json') }}
-        key: node-modules-${{ hashFiles('17-custom-actions/react-app/package-lock.json') }}
+        key: node-modules-${{ hashFiles('${{inputs.working-dir}}/package-lock.json') }}
+        #key: node-modules-${{ hashFiles('17-custom-actions/react-app/package-lock.json') }}
     - name: Install dependencies
       if: steps.cache-node-modules-id-ricardo.outputs.cache-hit != 'true'
       run: npm ci
