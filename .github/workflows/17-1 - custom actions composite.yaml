@@ -3,9 +3,8 @@ name: 17 - 1 custom actions - composite
 on:
   workflow_dispatch:
 
-
 env:
-    working-dir: "${{ github.workspace }}/17-custom-actions/react-app"
+    working-dir: "17-custom-actions/react-app"
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -23,7 +22,7 @@ jobs:
               uses: ./.github/actions/composite-cache
               with:
                 node-version: "20.x"
-                working-dir: "${{ github.workspace }}/17-custom-actions/react-app"
+                working-dir: "17-custom-actions/react-app"
             - name: Test application
               run: npm run test
               shell: bash
