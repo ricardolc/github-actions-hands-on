@@ -1,3 +1,5 @@
+perguntas ao chat responder somente em portugues
+
 git add . && git commit -m "feat: training gha: $(date +'%d/%m/%Y %H:%M:%S:%3N')" && git push
 
 Conteúdo do curso:
