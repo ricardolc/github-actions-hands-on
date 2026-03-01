@@ -2,7 +2,7 @@ name: Cache Node and NPM dependencies
 description: "Allows actions Ricardo"
 
 # antes de executar o aplicativo criar a pasta 17 e dentro dela criar o app react conforme comando abaixo
-# sudo npx create-app-react --template typescript react-app
+# npx create-react-app react-app --template typescript   # correct command
 inputs:
   node-version:
     description: "Node.js version to use"
