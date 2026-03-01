@@ -18,7 +18,6 @@ jobs:
                 echo "Listing contents of react-app directory..." && ls -la
                 echo "diretorio de trabalho: ${{ env.working-dir }}"
                 echo "pwd: " && pwd
-              
             - uses: actions/checkout@v3
             - name: Setup Node and NPM dependencies using custom composite action
               uses: ./.github/actions/composite-cache
