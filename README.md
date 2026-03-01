@@ -1,3 +1,5 @@
+git add . && git commit -m "feat: training gha: $(date +'%d/%m/%Y %H:%M:%S:%3N')" && git push
+
 Conteúdo do curso:
  - https://github.com/lm-academy/github-actions-course
 
@@ -8,7 +10,6 @@ https://github.com/marketplace?type=actions
 https://github.com/aws-actions  
 
 commit convention: 
-git add . && git commit -m "feat: training gha: $(date +'%d/%m/%Y %H:%M:%S:%3N')" && git push
 
 https://docs.github.com/pt/actions/reference/workflows-and-actions/workflow-syntax
 
@@ -37,4 +38,5 @@ Multiple Workflows:
       echo ${{ vars.NAME }}
 
 
-      cccc
+git stash
+git stash pop
