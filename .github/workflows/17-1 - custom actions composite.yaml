@@ -12,12 +12,12 @@ jobs:
           run:
             working-directory: ${{ env.working-dir }}
         steps:
+            - uses: actions/checkout@v3
             - name: List react-app directory
               run: |
                 echo "Listing contents of react-app directory..." && ls -la
                 echo "diretorio de trabalho: ${{ env.working-dir }}"
                 echo "pwd: " && pwd
-            - uses: actions/checkout@v3
             - name: Setup Node and NPM dependencies using custom composite action
               uses: ./.github/actions/composite-cache
               with:
