@@ -14,7 +14,7 @@ jobs:
             working-directory: ${{ env.working-dir }}
         steps:
             - name: List react-app directory
-              run: ls -ltr "${{ github.workspace }}/17-custom-actions/react-app"
+              run: ls -ltr "${{ github.workspace }}"
               shell: bash
             - uses: actions/checkout@v3
             - name: Setup Node and NPM dependencies using custom composite action
