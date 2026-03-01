@@ -5,20 +5,23 @@ on:
 
 
 env:
-    working-dir: 17-custom-actions/react-app
+    working-dir: "${{ github.workspace }}/17-custom-actions/react-app"
 jobs:
     build:
         runs-on: ubuntu-latest
         defaults:
           run:
-            working-directory: 17-custom-actions/react-app
+            working-directory: ${{ env.working-dir }}
         steps:
+            - name: List react-app directory
+              run: ls -ltr "${{ github.workspace }}/17-custom-actions/react-app"
+              shell: bash
             - uses: actions/checkout@v3
             - name: Setup Node and NPM dependencies using custom composite action
               uses: ./.github/actions/composite-cache
               with:
                 node-version: "20.x"
-                working-dir: "17-custom-actions/react-app"
+                working-dir: "${{ github.workspace }}/17-custom-actions/react-app"
             - name: Test application
               run: npm run test
               shell: bash
