@@ -16,6 +16,10 @@ inputs:
     description: "Working directory from application"
     required: false
     default: "."
+  target-env:
+    description: '"dev" or "prod" deve ser escolhido'
+    required: false
+    default: "dev"
 
 runs:
   using: "composite"
@@ -33,9 +37,7 @@ runs:
         key: node-modules-${{ hashFiles(format('{0}/{1}', inputs.working-dir, 'package-lock.json')) }}
         #key: node-modules-${{ hashFiles('17-custom-actions/react-app/package-lock.json') }}
     - name: Install dependencies
-      if: steps.cache-node-modules-id-ricardo.outputs.cache-hit != 'true'
-      run: npm ci
+      if: steps.cache-node-modules-id-ricardo.outputs.cache-hit != 'true' 
+      run: ${{ inputs.target-env == 'dev' && 'npm ci' || 'npm ci --omit=dev' }}
       shell: bash
       working-directory: ${{ inputs.working-dir }}
-
-

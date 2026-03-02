@@ -1,7 +1,15 @@
 name: 17 - 1 custom actions - composite
-
+run-name: 17 - 1 custom actions - composite | DEBUG - ${{ inputs.target-env }}
 on:
   workflow_dispatch:
+    inputs:
+      target-env:
+        description: '"dev" or "prod" deve ser escolhido'
+        type: choice
+        options:
+          - 'dev'
+          - 'prod'
+        default: 'dev'
 
 env:
     working-dir: "17-custom-actions/react-app"
@@ -23,6 +31,7 @@ jobs:
               with:
                 node-version: "20.x"
                 working-dir: "17-custom-actions/react-app"
+                target-env: ${{ inputs.target-env }}
             - name: Test application
               run: npm run test
               shell: bash
