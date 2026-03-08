@@ -1,0 +1,29 @@
+name: 17 - 2 custom actions - JS Function
+run-name: 17 - 2 custom actions - JS | DEBUG
+on:
+  workflow_dispatch:
+
+jobs:
+    dependency-update:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+            - name: Check for dependency updates using custom JavaScript action
+              uses: ./.github/actions/js-dependency-update
+              run: |
+                echo "Listing contents of react-app directory..." && ls -la
+                echo "diretorio de trabalho: ${{ env.working-dir }}"
+                echo "pwd: " && pwd
+            - name: Setup Node and NPM dependencies using custom composite action
+              uses: ./.github/actions/composite-cache
+              with:
+                node-version: "20.x"
+                working-dir: "17-custom-actions/react-app"
+                target-env: ${{ inputs.target-env }}
+            - name: Test application
+              run: npm run test
+              shell: bash
+            - name: Build application
+              run: npm run build
+              shell: bash
