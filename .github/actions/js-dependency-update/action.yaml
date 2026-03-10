@@ -22,9 +22,10 @@ inputs:
    gh-token:
       description: GitHub Token with permissions to create a pull request. Must have acces to content and pr
       required: true
-    debug:
+   debug:
       description: Enable debug mode for more verbose logging
-      default: 'false'
+      default: false
+
 
 runs:  
    using: node20
