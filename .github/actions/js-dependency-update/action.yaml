@@ -6,6 +6,26 @@ description:  check if there are updates for npm dependencies and create a pull 
 # npm i @actions/core@1.10.1 --save-exac
 # npm i @actions/exec@1.1.1 @actions/github@6.0.0 --save-exact
 
+inputs:
+   base-branch:
+     description: The Branch used as the base for the dependency update checks
+     default: main
+     required: false
+   target-branch:
+     description: The Branch from which the PR is create
+     default: dependency-update
+     required: false
+   working-directory:
+     description: The working directory of the project to check for dependency updates
+     default: .
+     required: true
+   gh-token:
+      description: GitHub Token with permissions to create a pull request. Must have acces to content and pr
+      required: true
+    debug:
+      description: Enable debug mode for more verbose logging
+      default: 'false'
+
 runs:  
    using: node20
    main: "index.js"
