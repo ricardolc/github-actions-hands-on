@@ -7,9 +7,14 @@ const validateBranchName = ({ branchName }) =>
 const validateDirectoryName = ({ dirName }) =>
   /^[a-zA-Z0-9_\-\/]+$/.test(dirName);
 
+const setupGitRicardo = async () => {
+  await exec.exec('git config user.name "github-actions[bot]"');
+  await exec.exec('git config user.email "github-actions[bot]@users.noreply.github.com"');
+}
+
 async function run() {
   const baseBranch = core.getInput('base-branch', { required: true });
-  const targetBranch = core.getInput('target-branch', { required: true });
+  const headBranch = core.getInput('head-branch', { required: true });
   const ghToken = core.getInput('gh-token', { required: true });
   const workingDir = core.getInput('working-directory', { required: true });
   const debug = core.getBooleanInput('debug');
@@ -19,9 +24,9 @@ async function run() {
   };
   core.setSecret(ghToken);
 
-  if (!validateBranchName({ branchName: baseBranch })) {
+  if (!validateBranchName({ branchName: headBranch })) {
     core.setFailed(
-      'Invalid base-branch name. Branch names should include only characters, numbers, hyphens, underscores, dots, and forward slashes.'
+      'Invalid head-branch name. Branch names should include only characters, numbers, hyphens, underscores, dots, and forward slashes.'
     );
     return;
   }
@@ -41,7 +46,7 @@ async function run() {
   }
 
   core.info(`[js-dependency-update] : base branch is ${baseBranch}`);
-  core.info(`[js-dependency-update] : target branch is ${targetBranch}`);
+  core.info(`[js-dependency-update] : head branch is ${targetBranch}`);
   core.info(`[js-dependency-update] : working directory is ${workingDir}`);
 
   await exec.exec('npm update', [], {
@@ -58,8 +63,10 @@ async function run() {
 
   if (gitStatus.stdout.length > 0) {
     core.info('[js-dependency-update] : There are updates available!');
-    await exec.exec(`git config --global user.name "gh-automation"`);
-    await exec.exec(`git config --global user.email "gh-automation@email.com"`);
+   
+    await.setupGitRicardo();
+
+
     await exec.exec(`git checkout -b ${targetBranch}`, [], {
       ...commonExecOpts,
     });

@@ -1,0 +1,25 @@
+name: Ping USL
+Description: This action pings the USL to check if it's alive.
+
+inputs:
+  url:
+    description: 'The URL to ping'
+    required: true
+    default: 'https://usl.com/ping
+  max-trials:
+    description: 'The maximum number of ping attempts'
+    required: false
+    default: '10'
+  delay:
+    description: 'The delay between ping attempts in seconds'
+    required: false
+    default: '5'
+#python3 -m venv venv
+#pip3 install pip
+#pip3 freeze > requirements.txt
+runs: 
+  using: docker
+  image: Dockerfile
+
+
+'

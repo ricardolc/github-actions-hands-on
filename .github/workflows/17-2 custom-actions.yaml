@@ -1,5 +1,10 @@
 name: 17 - 2 custom actions - JS Function
 run-name: 17 - 2 custom actions - JS | BB - ${{ inputs.base-branch }} TB - ${{ inputs.target-branch }} - ${{ inputs.working-dir }}
+
+#settings
+#Code and automattions > General
+#Allow GitHub Actions to create and approve pull requests
+
 on:
   workflow_dispatch:
     inputs:
@@ -28,7 +33,7 @@ jobs:
 
               with:
                 base-branch: ${{ inputs.base-branch }}
-                target-branch: ${{ inputs.target-branch }}
+                head-branch: ${{ inputs.target-branch }}
                 working-directory: ${{ inputs.worging-dir }}
                 gh-token: ${{ secrets.GITHUB_TOKEN }}
                 #debug: 'true'

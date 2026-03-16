@@ -42,3 +42,8 @@ Multiple Workflows:
 
 git stash
 git stash pop
+
+
+#python3 -m venv venv
+#pip3 install pip
+#pip3 freeze > requirements.txt 
